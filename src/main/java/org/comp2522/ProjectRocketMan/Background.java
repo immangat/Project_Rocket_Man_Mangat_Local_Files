@@ -10,7 +10,7 @@ public class Background extends Sprite implements Movable {
   private float x;
   private float y;
   private float speed;
-  private ArrayList<Coin> coins;
+  private ArrayList<Heart> coins;
   private ArrayList<Zapper> zappers;
   private Window window;
 
@@ -72,7 +72,7 @@ public class Background extends Sprite implements Movable {
     }
 
     // Update the positions of the coins and zappers
-    for (Coin coin : coins) {
+    for (Heart coin : coins) {
       coin.update(speed);
     }
     for (Zapper zapper : zappers) {

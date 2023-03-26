@@ -1,14 +1,10 @@
 package org.comp2522.ProjectRocketMan;
-import com.mongodb.client.model.mql.MqlNumber;
-import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import java.util.ArrayList;
-
 import static processing.core.PApplet.abs;
 
-public class Coin extends Sprite implements Movable, Destroyable, Collidable {
+public class Heart extends Sprite implements Movable, Destroyable, Collidable {
 
   private PImage image;
 
@@ -26,7 +22,7 @@ public class Coin extends Sprite implements Movable, Destroyable, Collidable {
 
 
 
-  public Coin(PVector position, PVector direction,PImage[] animations, float speed) {
+  public Heart(PVector position, PVector direction, PImage[] animations, float speed) {
     super(position, direction);
     this.image = image;
     this.x = x;
@@ -35,23 +31,19 @@ public class Coin extends Sprite implements Movable, Destroyable, Collidable {
     this.window = Window.getInstance();
     this.index = (int) window.random(0,6);
     this.animations = animations;
-    this.height = animations[0].width / 50f;
-    this.width = animations[0].width / 50f;
+    this.height = animations[0].width * 10;
+    this.width = animations[0].width * 10;
 
   }
 
-  private void setupCoinAnimations(){
-    animations = new PImage[6];
-    for(int i = 1; i <= 6; i++){
-      animations[i - 1] = window.loadImage("images/rocket_man_coins/star coin rotate " + i + ".png");
-    }
-  }
+
   public void update(float speed) {
     x -= speed;
   }
 
   @Override
   public void setPosition(PVector position) {
+    this.position = position;
 
   }
 
@@ -82,7 +74,7 @@ public class Coin extends Sprite implements Movable, Destroyable, Collidable {
 
   public void draw() {
 
-    window.image(animations[index % animations.length], position.x, position.y, animations[0].width / 50f, animations[0].height / 50f);
+    window.image(animations[index % animations.length], position.x, position.y, animations[0].width / 20f , animations[0].height / 20f);
     animate();
     window.stroke(0);        // set the stroke color to black
     window.fill(255, 0, 0);  // set the fill color to red

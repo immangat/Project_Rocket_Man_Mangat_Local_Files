@@ -6,8 +6,7 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static processing.core.PApplet.hex;
-import static processing.core.PApplet.radians;
+import static processing.core.PApplet.*;
 
 public class Rocket extends Sprite implements Movable, Destroyable, Collidable {
 
@@ -45,7 +44,10 @@ public class Rocket extends Sprite implements Movable, Destroyable, Collidable {
 //    window.rotate(window.PI/4);
 //    window.imageMode(window.CENTER);
 //    window.rotate(radians(angle));
-    window.image(image,position.x, position.y, image.height / 4, image.width / 4);
+    window.image(image,position.x, position.y, image.height / 2, image.width / 6);
+    window.stroke(0);        // set the stroke color to black
+    window.fill(255, 0, 0);  // set the fill color to red
+    window.ellipse(position.x,position.y, 4, 4);
 //    window.popMatrix();
 
   }
@@ -107,13 +109,18 @@ public class Rocket extends Sprite implements Movable, Destroyable, Collidable {
 
   @Override
   public boolean collided(Player player) {
-    float xPositionOfRocket = this.position.x;
-    float yPositionOfRocket = this.position.y;
-    float xPositionOfPlayer = player.getPosition().x + player.getImage().width / 10f;
-    float yPositionOfPlayer = player.getPosition().y + player.getImage().width / 10f;
-    return xPositionOfRocket < xPositionOfPlayer && xPositionOfRocket > player.getPosition().x
-            && yPositionOfRocket < yPositionOfPlayer && yPositionOfRocket >
-            player.getPosition().y;
+    float yDistance = this.position.y - player.position.y;
+    float xDistance = this.position.x - player.position.x;
+    float xDistanceOffset = player.getWidth()* .3f;
+    float yDistanceOffset = player.getHeight()* .3f;
+    return abs(yDistance) < player.getHeight() - xDistanceOffset && abs(xDistance) < player.getWidth() - yDistanceOffset;
+//    float xPositionOfRocket = this.position.x;
+//    float yPositionOfRocket = this.position.y;
+//    float xPositionOfPlayer = player.getPosition().x + player.getImage().width / 10f;
+//    float yPositionOfPlayer = player.getPosition().y + player.getImage().width / 10f;
+//    return xPositionOfRocket < xPositionOfPlayer && xPositionOfRocket > player.getPosition().x
+//            && yPositionOfRocket < yPositionOfPlayer && yPositionOfRocket >
+//            player.getPosition().y;
 
   }
 }
