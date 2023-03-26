@@ -27,6 +27,8 @@ public class Player extends Sprite implements Movable, Destroyable{
   private int score;
 
 
+  private int numberOfCoinsCollected;
+
 
 
   private Player(PVector position, PVector direction, PImage image, float speed) {
@@ -48,6 +50,14 @@ public class Player extends Sprite implements Movable, Destroyable{
 
   public void setGravity(float gravity) {
     this.gravity = gravity;
+  }
+
+  public int getNumberOfCoinsCollected() {
+    return numberOfCoinsCollected;
+  }
+
+  public void setNumberOfCoinsCollected(int numberOfCoinsCollected) {
+    this.numberOfCoinsCollected = numberOfCoinsCollected;
   }
 
   public float getAcceleration() {

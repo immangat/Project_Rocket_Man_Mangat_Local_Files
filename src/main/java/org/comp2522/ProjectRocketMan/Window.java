@@ -186,6 +186,7 @@ public class Window extends PApplet {
     textAlign(CENTER, CENTER);
     text("Current Score: " + player.getScore(), width - 100, 20);
 
+    text("Coins: " + player.getNumberOfCoinsCollected(), width - 250, 20);
     manager.manageTheGame();
 
 

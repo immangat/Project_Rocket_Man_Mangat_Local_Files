@@ -76,7 +76,7 @@ public class Background extends Sprite implements Movable {
       coin.update(speed);
     }
     for (Zapper zapper : zappers) {
-      zapper.update(speed);
+//      zapper.update(speed);
     }
   }
 
@@ -91,7 +91,7 @@ public class Background extends Sprite implements Movable {
   public ArrayList<Float> getZapperPositions() {
     ArrayList<Float> positions = new ArrayList<>();
     for (Zapper zapper : zappers) {
-      positions.add(zapper.getPosition());
+//      positions.add(zapper.getPosition());
     }
     return positions;
   }

@@ -18,6 +18,12 @@ public class Coin extends Sprite implements Movable, Destroyable, Collidable {
   private float speed;
   private Window window;
 
+  private float height;
+
+  private float width;
+
+
+
   public Coin(PVector position, PVector direction,PImage[] animations, float speed) {
     super(position, direction);
     this.image = image;
@@ -26,7 +32,9 @@ public class Coin extends Sprite implements Movable, Destroyable, Collidable {
     this.speed = speed;
     this.window = Window.getInstance();
     this.index = (int) window.random(0,6);
-    this.animations =animations;
+    this.animations = animations;
+    this.height = animations[0].width / 50f;
+    this.width = animations[0].width / 50f;
 
   }
 
@@ -95,6 +103,15 @@ public class Coin extends Sprite implements Movable, Destroyable, Collidable {
 
   }
 
+  public float getHeight() {
+    return height;
+  }
+
+  public float getWidth() {
+    return width;
+  }
+
+
   @Override
   public Boolean isDestroyed() {
     return null;
@@ -109,4 +126,6 @@ public class Coin extends Sprite implements Movable, Destroyable, Collidable {
   public void onDestroy() {
 
   }
+
+
 }
