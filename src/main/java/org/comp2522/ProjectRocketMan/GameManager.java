@@ -75,47 +75,31 @@ public class GameManager {
 
 
   public void init(ArrayList<Sprite> sprites, ArrayList<Movable> movables) {
-    this.coins = new ArrayList<Coin>();
-    this.sprites = sprites;
-    this.moveables = movables;
-    this.collidables = new ArrayList<Collidable>();
-    rocket_image = window.loadImage("images/rockect_images/rocket_3.png");
-    rocket_man_image = window.loadImage("images/rocket_man_images/My project2.png");
+    this.coins        = new ArrayList<Coin>();
+    this.sprites      = sprites;
+    this.moveables    = movables;
+    this.collidables  = new ArrayList<Collidable>();
+    rocket_image      = window.loadImage("images/rockect_images/rocket_3.png");
+    rocket_man_image  = window.loadImage("images/rocket_man_images/My project2.png");
     background_images = window.loadImage("images/rocket_man_backgrounds/AIgen.png");
-    coin = window.loadImage("images/rocket_man_coins/star coin rotate 1.png");
+    coin              = window.loadImage("images/rocket_man_coins/star coin rotate 1.png");
 
 
-    background = new Background(background_images,1, new PVector(0,0),
-        new PVector(1, 1) );
+    background = new Background(background_images,
+                                      1,
+                        new PVector(0,0),
+                        new PVector(1,1));
     player = Player.getInstance(new PVector(window.width * 0.10f,window.height / 2),
-        new PVector(1, 1), rocket_man_image, 0);
-//    currentLevel = 1;
-//    currentSpeed = 3;
-//    rocketSpeed = 5;
-//    coinsPerWindow = 6;
-//    background.setSpeed(currentSpeed);
-//    background.setCoinNum(coinsPerWindow);
-//    background.setZapperNum(zapperNums);
+                                new PVector(1,                   1),
+                                rocket_man_image,
+                                0);
 
     rockets = new ArrayList<Rocket>();
-//    sprites = new ArrayList<Sprite>();
-//    moveables = new ArrayList<Movable>();
-
-
-
-//    for(int i = 0; i < 2; i++){
-//      rockets.add(new Rocket(new PVector(window.width, i * 200),
-//          new PVector(window.random(-1, 1), window.random(-1,1)), rocket_image, window.random(-10, -1)));
-//    }
 
     setupCoinAnimations();
     setupHeartAnimations();
-//    for(int i = 0; i < 10; i++){
-//      coins.add(new Coin(new PVector(window.width + i * 50, i * 50), new PVector(window.width, i * 200), coinAnimation, 1));
-//    }
     this.sprites.add(background);
     this.moveables.add(background);
-
     this.sprites.addAll(coins);
     this.sprites.addAll(rockets);
     this.moveables.addAll(rockets);
@@ -124,17 +108,6 @@ public class GameManager {
     this.moveables.addAll(coins);
     this.collidables.addAll(coins);
     this.collidables.addAll(rockets);
-
-
-
-//    for (int i = 0; i < rocketNums; i++) {
-//      PVector position = 0;
-//      PVector direction = 0;
-//      PImage image = "";
-//      Rocket tempRocket = new Rocket(position, direction, image, window);
-//      tempRocket.setSpeed(rocketSpeed);
-//      rockets.add(tempRocket);
-//    }
   }
 
 
@@ -156,15 +129,23 @@ public class GameManager {
   /*Code to manage Different Things*/
 
   public void manageTheGame(){
-    draw();
-    move();
-    checkForCollisions();
-    manageRockets();
-    manageCoins();
-    manageHeart();
-    manageBackground();
-    updatePlayerScoer();
+    int gameState = 0;
+    switch(gameState){
+      case 0:
+        draw();
+        move();
+        checkForCollisions();
+        manageRockets();
+        manageCoins();
+        manageHeart();
+        manageBackground();
+        updatePlayerScoer();
+        break;
+      case 1:
+        //
+      default:;
 
+    }
 
   }
 
@@ -307,15 +288,6 @@ private void manageBackground(){
 
   }
 
-
-
-
-
-
-
-
-
-
   /*Code to Manage Coins*/
 
   private void manageCoins(){
@@ -435,49 +407,6 @@ private void manageBackground(){
     //close window
   }
 
-//  public int update() {
-//    background.update();
-//    for (int i = 0; i < rocketNums; i++) {
-//      Rocket rocket = rockets.get(i);
-//      rocket.update();
-//      if (isCollided(player, rocket)) {
-//        return 0;// 0 means game over
-//      }
-//    }
-//
-//    for (int i = 0; i < zapperNums; i++) {
-//      Zapper zapper = background.zappers.get(i);
-//      if (player.getPosition.equalsto(zapper.getPosition())) {
-//        return 0;
-//      }
-////      if (isCollided(player, zapper)) {
-////        return 0;// 0 means game over
-////      }
-//    }
-//
-//    for (int i = 0; i < coinsPerWindow; i++) {
-//      Coin coin = background.coins.get(i);
-//      if (coin.getPostion().equalsto(player.getPostion())) {
-//        //remove this coin; if don't use iterator,there will be problem
-//        background.remove();//need discuss
-//        player.currCoin++;
-//      }
-//    }
-//
-//    //if level up
-//    if (player.currCoin >= leveUpCoins) {
-//      currentLevel++;
-//      background.setSpeed(background.getSpeed() + 1);
-//    }
-//
-//  }
-//
-//  public boolean isCollided(Player player, Rocket rocket) {
-//    return player.getPosition.equalsto(rocket.getPosition());
-//    //System.out.println("Handling collision between " + obj1 + " and " + obj2);
-//    // Handle collision between two game objects.
-//  }
-
   public void pause() {
     isPaused = true;
     // Display pause menu, etc.
@@ -522,7 +451,7 @@ private void manageBackground(){
       }
       reader.close();
       String gameState = jsonData.toString();
-      //get current level number and speed
+      //get current leveFl number and speed
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -11,7 +11,7 @@ public class Background extends Sprite implements Movable {
   private float y;
   private float speed;
   private ArrayList<Heart> coins;
-  private ArrayList<Zapper> zappers;
+  private ArrayList<Zapper> zappers;  
   private Window window;
 
   private float scrollSpeed = 1.5f;
