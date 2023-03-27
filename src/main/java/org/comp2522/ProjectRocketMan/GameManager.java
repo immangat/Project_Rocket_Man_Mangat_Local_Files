@@ -138,6 +138,7 @@ public class GameManager {
   }
 
 
+
   private void setupCoinAnimations(){
     coinAnimation = new PImage[6];
     for(int i = 1; i <= 6; i++){
@@ -155,6 +156,8 @@ public class GameManager {
   /*Code to manage Different Things*/
 
   public void manageTheGame(){
+    draw();
+    move();
     checkForCollisions();
     manageRockets();
     manageCoins();
@@ -166,6 +169,37 @@ public class GameManager {
   }
 
 
+  private void draw(){
+    drawSprites();
+    drawInformation();
+
+  }
+
+  private void drawInformation() {
+    window.textSize(20);
+    window.textAlign(window.CENTER, window.CENTER);
+    window.text("Current Score: " + player.getScore(), window.width - 100, 20);
+
+    window.text("Coins: " + player.getNumberOfCoinsCollected(), window.width - 250, 20);
+    window.text("Hearts: " + player.getHearts(), window.width - 350, 20);  window.textSize(20);
+    window.textAlign(window.CENTER, window.CENTER);
+    window.text("Current Score: " + player.getScore(), window.width - 100, 20);
+
+    window.text("Coins: " + player.getNumberOfCoinsCollected(), window.width - 250, 20);
+    window.text("Hearts: " + player.getHearts(), window.width - 350, 20);
+  }
+
+
+  private void drawSprites(){
+    for (Sprite sprite : sprites) {
+      sprite.draw();
+    }
+  }
+  private void move(){
+    for(Movable move : moveables){
+      move.move();
+    }
+  }
 
   private void checkForCollisions(){
     ArrayList<Collidable> toRemove = new ArrayList<Collidable>();

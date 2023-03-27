@@ -132,32 +132,7 @@ public class Window extends PApplet {
    */
 
   public void draw() {
-
-
-    background(0);
-    for (Sprite sprite : sprites) {
-//      sprite.update();
-      sprite.draw();
-//      wall.draw();
-//      if (wall.collided(sprite)) {
-//        sprite.setDirection(sprite.getDirection().mult(-1));
-    }
-
-
-    for(Movable move : moveables){
-      move.move();
-    }
-
-    textSize(20);
-    textAlign(CENTER, CENTER);
-    text("Current Score: " + player.getScore(), width - 100, 20);
-
-    text("Coins: " + player.getNumberOfCoinsCollected(), width - 250, 20);
-    text("Hearts: " + player.getHearts(), width - 350, 20);
     manager.manageTheGame();
-
-
-
   }
 
   public void keyPressed(KeyEvent event) {

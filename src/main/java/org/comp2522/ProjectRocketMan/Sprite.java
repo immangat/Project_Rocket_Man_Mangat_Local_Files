@@ -22,6 +22,6 @@ public abstract class Sprite {
 
 
 
-  void draw(){}
+  abstract void draw();
 
 }
