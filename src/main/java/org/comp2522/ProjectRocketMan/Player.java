@@ -16,11 +16,11 @@ public class Player extends Sprite implements Movable, Destroyable{
    */
   private float speed = 0;
 
-  private float acceleration = 1f;
+  private float acceleration = 1.5f;
 
   private float maxSpeed = -7f;
 
-  private float gravity = 0.3f;
+  private float gravity = 0.2f;
 
   private static Player player;
 
@@ -110,12 +110,12 @@ public class Player extends Sprite implements Movable, Destroyable{
   public void keyPressed(KeyEvent event) {
     int keyCode = event.getKeyCode();
     if(keyCode == UP && position.y > image.height/10f){
-      setSpeed(getSpeed() - getAcceleration());
+      setSpeed(getSpeed() * 0.8f - getAcceleration());
       if(getSpeed() < maxSpeed){
         setSpeed(maxSpeed);
       }
     } else {
-      if(keyCode == UP && position.y < image.height/20f) {
+      if(keyCode == UP && position.y < image.height/20f) { //put the logic of movement in move method
         if(speed != 0){
           speed = 0;
         }
@@ -169,7 +169,7 @@ public class Player extends Sprite implements Movable, Destroyable{
   @Override
   public void move() {
     PVector temp = new PVector(getPosition().x, getPosition().y);
-    float bottomLimit = window.height - image.height/10f - 90; // set bottom limit to 50 pixels above the bottom of the window
+    float bottomLimit = window.height - height - 90; // set bottom limit to 50 pixels above the bottom of the window
     if (temp.y + getSpeed() >= image.height/10f && temp.y + getSpeed() <= bottomLimit) {
       temp.add(0, getSpeed());
       setPosition(temp);
@@ -178,7 +178,7 @@ public class Player extends Sprite implements Movable, Destroyable{
       this.speed = 0;
     } else {
       if (position.y + getSpeed() < bottomLimit) {
-        if (getSpeed() > -maxSpeed) {
+        if (getSpeed() > -(maxSpeed + 2)) {
           setSpeed(-maxSpeed);
         } else {
           setSpeed(getSpeed() + getGravity());

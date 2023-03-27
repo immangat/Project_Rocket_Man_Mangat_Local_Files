@@ -38,10 +38,8 @@ public class GameManager {
   private int leveUpCoins;
   private int currentSpeed;
   private int rocketNums;
-  private int rocketSpeed;
   private int coinsPerWindow;
   private int zapperNums;
-
 
 
 
@@ -90,7 +88,7 @@ public class GameManager {
     background = new Background(background_images,1, new PVector(0,0),
         new PVector(1, 1) );
     player = Player.getInstance(new PVector(window.width * 0.10f,window.height / 2),
-        new PVector(1, 1), rocket_man_image, -2);
+        new PVector(1, 1), rocket_man_image, 0);
 //    currentLevel = 1;
 //    currentSpeed = 3;
 //    rocketSpeed = 5;
@@ -161,7 +159,9 @@ public class GameManager {
     manageRockets();
     manageCoins();
     manageHeart();
+    manageBackground();
     updatePlayerScoer();
+
 
   }
 
@@ -211,14 +211,26 @@ private void manageHeart() {
     moveables.add(heart);
   }
   if(heart.getPosition().x < 50){
-      heart.setPosition(new PVector(1000, 440));
-      collidables.add(heart);
-      sprites.add(heart);
+      heart.setPosition(new PVector(window.random(window.width, window.width * 2), window.random(0,window.height)));
+      if(!sprites.contains(heart)){
+        sprites.add(heart);
+        collidables.add(heart);
+      }
   }
+
+  heart.setSpeed(background.getSpeed());
 
 
 }
 
+/*Code to manage background*/
+private void manageBackground(){
+  if(window.frameCount % 200 == 0){
+    background.setSpeed(Window.min(10f, background.getSpeed() + 0.2f));
+    System.out.println(background.getSpeed()+ "\n");
+
+  }
+}
 
 
   /* Code to Manage Rockets*/
@@ -227,6 +239,7 @@ private void manageHeart() {
     int numberofRocketsOffScreen = 0;
 
     for(Rocket temp : rockets){
+      temp.setSpeed((background.getSpeed() * -1) - (0.4f * background.getSpeed()));
       if(temp.getPosition().x < -50 ){
         rocketsOutOfBound.add(temp);
         numberofRocketsOffScreen++;
@@ -239,7 +252,7 @@ private void manageHeart() {
     collidables.removeAll(rocketsOutOfBound);
 
     if(rockets.size() == 0){
-      numberofRocketsOffScreen = 4;
+      numberofRocketsOffScreen = 2;
       addRockets(numberofRocketsOffScreen);
     }
 
@@ -249,7 +262,8 @@ private void manageHeart() {
   private void addRockets(int rocketsToAdd){
     for(int i = 0; i < rocketsToAdd; i++){
       Rocket tobeAdded = new Rocket(new PVector(window.random(window.width, window.width * 2), window.random(0,window.height)),
-              new PVector(window.random(-1, 1), window.random(-1,1)), rocket_image, window.random(-10, -1));
+              new PVector(window.random(-1, 1), window.random(-1,1)), rocket_image,
+              (background.getSpeed() * -1) - (0.2f * background.getSpeed()));
       rockets.add(tobeAdded);
       sprites.add(tobeAdded);
       moveables.add(tobeAdded);
@@ -448,7 +462,7 @@ private void manageHeart() {
     jo.put("currentLevel", currentLevel);
     jo.put("currentSpeed", currentSpeed);
     jo.put("rocketNums", rocketNums);
-    jo.put("rocketSpeed", rocketSpeed);
+//    jo.put("rocketSpeed", rocketSpeed);
     jo.put("coinsPerWindow", coinsPerWindow);
     jo.put("zapperNums", zapperNums);
 

@@ -98,8 +98,8 @@ public class Background extends Sprite implements Movable {
 
   public void draw() {
 
-    position.y = scrollSpeed;
-    position.x -= scrollSpeed * 5;
+    position.y = speed;
+    position.x -= speed;
 //    position.y = scrollSpeed * 16;
 
 

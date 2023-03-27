@@ -106,7 +106,6 @@ public class Rocket extends Sprite implements Movable, Destroyable, Collidable {
 
   }
 
-
   @Override
   public boolean collided(Player player) {
     float yDistance = this.position.y - player.position.y;

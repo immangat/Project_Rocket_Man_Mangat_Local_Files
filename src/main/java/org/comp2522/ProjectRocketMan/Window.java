@@ -5,6 +5,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 import processing.event.KeyEvent;
 
+import java.awt.desktop.SystemEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,6 +155,7 @@ public class Window extends PApplet {
     text("Coins: " + player.getNumberOfCoinsCollected(), width - 250, 20);
     text("Hearts: " + player.getHearts(), width - 350, 20);
     manager.manageTheGame();
+
 
 
   }
